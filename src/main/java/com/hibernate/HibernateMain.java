@@ -37,6 +37,19 @@ public class HibernateMain {
         session.save(userDetails);
         session.getTransaction().commit();
 
+        session.close();
+
+
+        //Fetching data from DB
+
+        userDetails = null;
+
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        userDetails = session.get(UserDetails.class, 1) ; // Object to be retrieved  from DB, Data to be retrieved
+
+        System.out.println(userDetails.toString());
 
     }
 }
