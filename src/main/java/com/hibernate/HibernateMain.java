@@ -17,9 +17,10 @@ public class HibernateMain {
         userDetails.setUserName("First User");
 
         // 02.Create a SessionFactory obj and Reads the configuration file (hibernate.cfg.xml)
-       SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
-        //SessionFactory sessionFactory = new Configuration().configure("com/hibernate/hibernate.cfg.xml").buildSessionFactory();
+        //SessionFactory sessionFactory = new Configuration().configure("com/somepackageName/hibernate.cfg.xml").buildSessionFactory();
+
         // 03.Create a Session obj
         Session session = sessionFactory.openSession();
 
