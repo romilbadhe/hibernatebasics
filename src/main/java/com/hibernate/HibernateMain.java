@@ -1,11 +1,11 @@
 package com.hibernate;
 
-
 import com.hibernate.dto.UserDetails;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class HibernateMain {
@@ -13,14 +13,15 @@ public class HibernateMain {
     public static void main(String[] args) {
 
         // 01.Create Model obj
-        UserDetails userDetails = new UserDetails();
+        UserDetails userDetails1 = new UserDetails();
 
-        userDetails.setUserId(1);
-        userDetails.setUserName("First User");
-        userDetails.setPassword("password");
-        userDetails.setJoinedDate(new Date());
-        userDetails.setAddress("Some Address");
-        userDetails.setDescription("Here is some description");
+        //userDetails.setUserId(1);
+        userDetails1.setUserName("First User");
+        userDetails1.setPassword("password");
+        userDetails1.setJoinedDate(new Date());
+        userDetails1.setAddress("Some Address");
+        userDetails1.setDescription("Here is some description");
+
 
         // 02.Create a SessionFactory obj and Reads the configuration file (hibernate.cfg.xml)
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -34,7 +35,25 @@ public class HibernateMain {
         session.beginTransaction();
 
         // 05.Save the Model object and commit tx
-        session.save(userDetails);
+        session.save(userDetails1);
+
+        UserDetails userDetails2 = new UserDetails();
+
+        userDetails2.setUserName("Second User");
+        userDetails2.setAddress("No Where");
+        userDetails2.setDescription("Other Description");
+
+        String sDate1="31/12/1998";
+
+        try {
+            Date joinDate =new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+            userDetails2.setJoinedDate(joinDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        session.save(userDetails2);
+
         session.getTransaction().commit();
 
         session.close();
@@ -42,14 +61,20 @@ public class HibernateMain {
 
         //Fetching data from DB
 
-        userDetails = null;
+        userDetails1 = null;
+        userDetails2 = null;
 
         session = sessionFactory.openSession();
         session.beginTransaction();
 
-        userDetails = session.get(UserDetails.class, 1) ; // Object to be retrieved  from DB, Data to be retrieved
+        userDetails1 = session.get(UserDetails.class, 1) ; // Object to be retrieved  from DB, Data to be retrieved
 
-        System.out.println(userDetails.toString());
+        userDetails2 = session.get(UserDetails.class, 2);
+
+        System.out.println(userDetails1.toString());
+        System.out.println(userDetails2.toString());
+
+        session.close();
 
     }
 }

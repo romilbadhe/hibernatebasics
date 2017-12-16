@@ -12,7 +12,10 @@ public class UserDetails {
 
     @Id
     @Column(name = "user_id")
+    @GeneratedValue()
     private int userId;
+
+
 
     @Basic(fetch = FetchType.EAGER)  // to user Fetch type use @Basic Annotations
     @Column(name = "user_name")
