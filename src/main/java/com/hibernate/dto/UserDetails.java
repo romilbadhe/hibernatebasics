@@ -1,17 +1,19 @@
 package com.hibernate.dto;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.Id;
 
-@Entity
+
+@Entity(name = "user")
 public class UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private int userId;
 
-
+    @Column(name = "user_name")
     private String userName;
-
 
     public int getUserId() {
         return userId;
