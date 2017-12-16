@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.Date;
+
 public class HibernateMain {
 
     public static void main(String[] args) {
@@ -15,6 +17,10 @@ public class HibernateMain {
 
         userDetails.setUserId(1);
         userDetails.setUserName("First User");
+        userDetails.setPassword("password");
+        userDetails.setJoinedDate(new Date());
+        userDetails.setAddress("Some Address");
+        userDetails.setDescription("Here is some description");
 
         // 02.Create a SessionFactory obj and Reads the configuration file (hibernate.cfg.xml)
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
