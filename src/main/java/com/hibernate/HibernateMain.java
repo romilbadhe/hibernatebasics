@@ -1,5 +1,6 @@
 package com.hibernate;
 
+import com.hibernate.dto.Address;
 import com.hibernate.dto.UserDetails;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,7 +20,17 @@ public class HibernateMain {
         userDetails1.setUserName("First User");
         userDetails1.setPassword("password");
         userDetails1.setJoinedDate(new Date());
-        userDetails1.setAddress("Some Address");
+
+        // Creating object of Address
+        Address address = new Address();
+
+        address.setState("New York");
+        address.setCity("NY City");
+        address.setStreet("13th Broadway");
+        address.setPincode("455110");
+
+        userDetails1.setAddress(address);
+
         userDetails1.setDescription("Here is some description");
 
 
@@ -40,12 +51,11 @@ public class HibernateMain {
         UserDetails userDetails2 = new UserDetails();
 
         userDetails2.setUserName("Second User");
-        userDetails2.setAddress("No Where");
         userDetails2.setDescription("Other Description");
 
         String sDate1="31/12/1998";
 
-        try {
+            try {
             Date joinDate =new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
             userDetails2.setJoinedDate(joinDate);
         } catch (ParseException e) {

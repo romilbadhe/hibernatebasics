@@ -27,11 +27,13 @@ public class UserDetails {
 
     @Temporal(TemporalType.DATE)   // only Date will be stored without timestamp
     private Date joinedDate;
-    private String address;
+
+    //private String address;
+    @Embedded
+    private Address address;
 
     @Lob  // Saving Large object (CLOB: form String  or BLOB : byte[])
     private String description;
-
 
 
     public int getUserId() {
@@ -66,11 +68,11 @@ public class UserDetails {
         this.joinedDate = joinedDate;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
