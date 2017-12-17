@@ -15,8 +15,6 @@ public class UserDetails {
     @GeneratedValue()
     private int userId;
 
-
-
     @Basic(fetch = FetchType.EAGER)  // to user Fetch type use @Basic Annotations
     @Column(name = "user_name")
     private String userName;
@@ -31,6 +29,15 @@ public class UserDetails {
     //private String address;
     @Embedded
     private Address address;
+
+    // Attribute Annotations for Embbeded objects
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "street", column =@Column(name = "office_street")),
+            @AttributeOverride(name = "city", column =@Column(name = "office_city_name")),
+            @AttributeOverride(name = "state", column =@Column(name = "office_state_name")),
+            @AttributeOverride(name = "pincode", column =@Column(name = "office_pincode"))})
+    private Address officeAddress;
 
     @Lob  // Saving Large object (CLOB: form String  or BLOB : byte[])
     private String description;
@@ -74,6 +81,14 @@ public class UserDetails {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Address getOfficeAddress() {
+        return officeAddress;
+    }
+
+    public void setOfficeAddress(Address officeAddress) {
+        this.officeAddress = officeAddress;
     }
 
     public String getDescription() {

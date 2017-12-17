@@ -29,7 +29,15 @@ public class HibernateMain {
         address.setStreet("13th Broadway");
         address.setPincode("455110");
 
+        // Creating object of Address(@AttributeOverride)
+        Address officeAddress = new Address();
+        officeAddress.setStreet("Wall Street");
+        officeAddress.setCity(address.getCity());
+        officeAddress.setState(address.getState());
+        officeAddress.setPincode("447770");
+
         userDetails1.setAddress(address);
+        userDetails1.setOfficeAddress(officeAddress);
 
         userDetails1.setDescription("Here is some description");
 

@@ -1,15 +1,20 @@
 package com.hibernate.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 @Entity
 public class Address {
 
-    private String street;
+
+    @Column(name = "city_name")  //column creating using @Annotation
     private String city;
+
+    @Column(name = "state_name")
     private String state;
+
     private String pincode;
 
-
+    private String street;
 
     public String getStreet() {
         return street;
@@ -46,10 +51,10 @@ public class Address {
     @Override
     public String toString() {
         return "Address{" +
-                "street='" + street + '\'' +
-                ", city='" + city + '\'' +
+                "city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", pincode='" + pincode + '\'' +
+                ", street='" + street + '\'' +
                 '}';
     }
 }
