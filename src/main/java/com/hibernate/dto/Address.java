@@ -1,10 +1,10 @@
 package com.hibernate.dto;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-@Entity
-public class Address {
+import javax.persistence.Embeddable;
 
+@Embeddable
+public class Address {
 
     @Column(name = "city_name")  //column creating using @Annotation
     private String city;
@@ -46,6 +46,16 @@ public class Address {
 
     public void setPincode(String pincode) {
         this.pincode = pincode;
+    }
+
+    public Address() {
+    }
+
+    public Address(String city, String state, String pincode, String street) {
+        this.city = city;
+        this.state = state;
+        this.pincode = pincode;
+        this.street = street;
     }
 
     @Override

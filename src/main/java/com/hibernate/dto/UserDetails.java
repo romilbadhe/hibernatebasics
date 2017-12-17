@@ -2,6 +2,9 @@ package com.hibernate.dto;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 
 // Providing new name to Entity
 // @Entity(name = "user")
@@ -26,22 +29,13 @@ public class UserDetails {
     @Temporal(TemporalType.DATE)   // only Date will be stored without timestamp
     private Date joinedDate;
 
-    //private String address;
-    @Embedded
-    private Address address;
-
-    // Attribute Annotations for Embbeded objects
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "street", column =@Column(name = "office_street")),
-            @AttributeOverride(name = "city", column =@Column(name = "office_city_name")),
-            @AttributeOverride(name = "state", column =@Column(name = "office_state_name")),
-            @AttributeOverride(name = "pincode", column =@Column(name = "office_pincode"))})
-    private Address officeAddress;
 
     @Lob  // Saving Large object (CLOB: form String  or BLOB : byte[])
     private String description;
 
+
+    @ElementCollection      // Mark Address to persist in db as collection
+    private Set<Address> listOfAddress = new HashSet<Address>();
 
     public int getUserId() {
         return userId;
@@ -75,20 +69,12 @@ public class UserDetails {
         this.joinedDate = joinedDate;
     }
 
-    public Address getAddress() {
-        return address;
+    public Set<Address> getListOfAddress() {
+        return listOfAddress;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public Address getOfficeAddress() {
-        return officeAddress;
-    }
-
-    public void setOfficeAddress(Address officeAddress) {
-        this.officeAddress = officeAddress;
+    public void setListOfAddress(Set<Address> listOfAddress) {
+        this.listOfAddress = listOfAddress;
     }
 
     public String getDescription() {
@@ -99,15 +85,5 @@ public class UserDetails {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "UserDetails{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", joinedDate=" + joinedDate +
-                ", address='" + address + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
+
 }
